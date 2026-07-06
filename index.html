@@ -2,17 +2,33 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Invito alla Laurea di Elena</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
     
     <style>
+        /* ==========================================================================
+           BLOCCO TOTALE STRUTTURALE (Anti-Rimbalzo e Immobile)
+           ========================================================================== */
+        html, body {
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            overflow: hidden !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            touch-action: none !important; /* Blocca lo scroll nativo del browser */
+            overscroll-behavior: none !important;
+            background-color: #121212;
+        }
+
         :root {
             --rosso-laurea: #990000;      
             --oro-premium: #D4AF37;        
             --verde-acceso: #00FF66;       
             --scuro-bg: #121212;           
-            --card-bg: rgba(255, 255, 255, 0.04); 
             --testo-light: #FFFFFF;
             
             --social-color: #4da3ff;
@@ -25,340 +41,185 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
         }
 
-       html {
-            height: 100%;
-            overflow: hidden;
-            overscroll-behavior: none; 
-            touch-action: none;
-        }
-
-        body {
-            background-color: var(--scuro-bg);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            color: var(--testo-light);
-            overflow: hidden;
-            touch-action: none; 
-            position: fixed;
-            width: 100vw;
-        }
+        /* Container principale che assorbe i tocchi */
         .mobile-container {
+            position: absolute !important;
+            top: 0; left: 0; right: 0; bottom: 0;
             width: 100%;
-            max-width: 410px; 
-            height: 100vh;
-            max-height: 840px; 
+            height: 100%;
             background: radial-gradient(circle at top left, #2a0000, #121212);
-            position: relative;
-            overflow-y: auto;
+            overflow: hidden !important;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            border-radius: 30px; 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            padding: 15px;
+            z-index: 10;
         }
 
-        @media (max-width: 480px) {
+        @media (min-width: 480px) {
+            body { display: flex; justify-content: center; align-items: center; }
             .mobile-container {
-                max-width: 100%;
-                height: 100vh;
-                max-height: 100vh;
-                border-radius: 0;
-                padding: 15px;
+                position: relative !important;
+                width: 410px; height: 840px; border-radius: 30px;
+                box-shadow: 0 20px 40px rgba(0,0,0,0.5);
             }
         }
 
-        .geo-shape {
+        /* ==========================================================================
+           EFFETTI DI SFONDO ANIMATI (Coriandoli e Circuiti)
+           ========================================================================== */
+        .tech-bg-element {
             position: absolute;
-            border-radius: 50%;
-            filter: blur(60px);
+            pointer-events: none;
             z-index: 1;
-            opacity: 0.5;
+            opacity: 0.25;
+            animation: floatAnimation 12s infinite linear;
         }
 
-        .shape-1 {
-            top: -50px;
-            right: -50px;
-            width: 230px;
-            height: 230px;
-            background: var(--rosso-laurea);
+        /* Fake circuiti stilizzati in CSS */
+        .circuit-1 {
+            top: 15%; left: 5%; width: 60px; height: 60px;
+            border-left: 2px solid var(--oro-premium);
+            border-bottom: 2px solid var(--oro-premium);
+        }
+        .circuit-1::after {
+            content: ''; position: absolute; bottom: -4px; right: 0;
+            width: 8px; height: 8px; background: var(--oro-premium); border-radius: 50%;
         }
 
-        .shape-2 {
-            bottom: -80px;
-            left: -50px;
-            width: 280px;
-            height: 280px;
-            background: var(--verde-acceso);
-            opacity: 0.15; 
+        .circuit-2 {
+            bottom: 20%; right: 8%; width: 80px; height: 40px;
+            border-right: 2px solid var(--rosso-laurea);
+            border-top: 2px solid var(--rosso-laurea);
+            animation-duration: 16s;
+        }
+        .circuit-2::after {
+            content: ''; position: absolute; top: -4px; left: 0;
+            width: 8px; height: 8px; background: var(--rosso-laurea); border-radius: 50%;
         }
 
-        .shape-3 {
+        /* Coriandoli geometrici fluttuanti */
+        .confetto {
             position: absolute;
-            width: 2px;
-            height: 35%;
-            background: linear-gradient(to bottom, transparent, var(--verde-acceso), transparent);
-            left: 10%;
-            bottom: 15%;
-            filter: blur(1px);
+            width: 10px; height: 10px;
+            pointer-events: none;
+            z-index: 1;
             opacity: 0.4;
-            z-index: 1;
+            animation: floatAnimation 8s infinite linear;
+        }
+        .c1 { background: var(--oro-premium); top: 10%; right: 20%; animation-duration: 9s; clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%); }
+        .c2 { background: var(--rosso-laurea); bottom: 15%; left: 15%; animation-duration: 11s; transform: rotate(45deg); }
+        .c3 { background: #ffffff; top: 45%; left: 8%; animation-duration: 14s; width: 6px; height: 12px; border-radius: 3px; }
+        .c4 { background: var(--oro-premium); bottom: 40%; right: 12%; animation-duration: 7s;}
+
+        @keyframes floatAnimation {
+            0% { transform: translateY(0px) rotate(0deg); opacity: 0.2; }
+            50% { transform: translateY(-25px) rotate(90deg); opacity: 0.5; }
+            100% { transform: translateY(0px) rotate(180deg); opacity: 0.2; }
         }
 
-        .main-content {
-            width: 100%;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+        /* Luci soffuse fisse di sfondo */
+        .geo-shape { position: absolute; border-radius: 50%; filter: blur(70px); z-index: 1; opacity: 0.4; pointer-events: none; }
+        .shape-1 { top: -50px; right: -50px; width: 230px; height: 230px; background: var(--rosso-laurea); }
+        .shape-2 { bottom: -80px; left: -50px; width: 280px; height: 280px; background: var(--verde-acceso); opacity: 0.1; }
 
-        .top-logo-container {
-            margin-bottom: -15px; 
-            z-index: 3; 
-        }
-
-        .top-logo {
-            width: 90px;
-            height: auto;
-            display: block;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
-        }
+        /* ==========================================================================
+           CARD VETRIFERATA CENTRALE
+           ========================================================================== */
+        .main-content { width: 100%; z-index: 5; display: flex; flex-direction: column; align-items: center; }
+        .top-logo-container { margin-bottom: -15px; z-index: 6; }
+        .top-logo { width: 90px; height: auto; display: block; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5)); }
 
         .card {
             position: relative;
-            background: linear-gradient(
-                145deg,
-                rgba(255, 255, 255, 0.06),
-                rgba(255, 255, 255, 0.02)
-            );
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 215, 120, 0.25);
             border-top: 3px solid #D4AF37;
-            padding: 45px 20px 35px 20px;
+            padding: 40px 20px 30px 20px;
             border-radius: 24px;
             width: 100%;
-            z-index: 2;
-            box-shadow:
-                0 20px 40px rgba(0,0,0,0.5),
-                0 0 25px rgba(212,175,55,0.15);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 25px rgba(212,175,55,0.15);
             text-align: center;
         }
 
         .card::before {
-            content: "";
-            position: absolute;
-            inset: 12px;
-            border-radius: 20px;
-            border: 1px solid rgba(212,175,55,0.15);
-            pointer-events: none;
-        }
-        .header {
-            margin-bottom: 25px;
+            content: ""; position: absolute; inset: 12px; border-radius: 20px;
+            border: 1px solid rgba(212,175,55,0.12); pointer-events: none;
         }
 
-        .pre-title {
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.7);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
+        /* Intestazioni */
+        .header { margin-bottom: 20px; }
+        .pre-title { font-size: 0.85rem; color: rgba(255, 255, 255, 0.7); text-transform: uppercase; letter-spacing: 2px; font-weight: 600; margin-bottom: 4px; }
+        
         .title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.1rem;
-            font-weight: 700;
-            line-height: 1.2;
-            background: linear-gradient(135deg, #ffffff 55%, #D4AF37);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 0.3px;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            font-family: 'Playfair Display', serif; font-size: 2.1rem; font-weight: 700; line-height: 1.2;
+            background: linear-gradient(135deg, #ffffff 55%, #D4AF37); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 6px; display: flex; align-items: center; justify-content: center; gap: 8px;
         }
 
-        .title-icon {
-            width: 50px;
-            height: auto;
-            vertical-align: middle;
-        }
+        .title-icon { width: 32px; height: auto; }
+        .subtitle { font-size: 0.85rem; color: var(--oro-premium); text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
 
-        .subtitle {
-            font-size: 0.85rem;
-            color: var(--oro-premium);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 600;
-        }
+        /* Politecnico */
+        .poli-section { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 20px; padding: 0 10px; }
+        .poli-text { font-size: 0.78rem; color: rgba(255, 255, 255, 0.65); text-align: left; line-height: 1.4; max-width: 250px; }
+        .poli-text strong { color: var(--oro-premium); }
+        .poli-logo { width: 42px; height: auto; }
 
-        .poli-section {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 25px;
-            padding: 0 10px;
-        }
-
-        .poli-text {
-            font-size: 0.78rem;
-            color: rgba(255, 255, 255, 0.65);
-            text-align: left;
-            line-height: 1.4;
-            max-width: 250px;
-        }
-
-        .poli-text strong {
-            color: var(--oro-premium);
-        }
-
-        .poli-logo {
-            width: 55px;
-            height: auto;
-            flex-shrink: 0;
-        }
-
-        .menu-navigation {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            width: 100%;
-        }
-
+        /* Pulsanti */
+        .menu-navigation { display: flex; flex-direction: column; gap: 14px; width: 100%; }
+        
         .btn-nav {
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1.5px solid rgba(255, 255, 255, 0.1);
-            padding: 15px 20px;
-            border-radius: 14px;
-            text-decoration: none;
-            color: white;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            text-align: left;
-            gap: 15px;
+            position: relative; overflow: hidden; display: flex; align-items: center;
+            background: rgba(0, 0, 0, 0.4); border: 1.5px solid rgba(255, 255, 255, 0.1);
+            padding: 14px 20px; border-radius: 14px; text-decoration: none; color: white; text-align: left; gap: 15px;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        div.btn-nav {
-            cursor: default;
-        }
+        .btn-icon-wrapper { width: 36px; height: 36px; display: flex; justify-content: center; align-items: center; flex-shrink: 0; }
+        .btn-img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .btn-text h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 2px; letter-spacing: 0.5px; }
+        .btn-text p { font-size: 0.85rem; color: rgba(255, 255, 255, 0.85); line-height: 1.3; }
 
-        .btn-icon-wrapper {
-            width: 36px;  
-            height: 36px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-shrink: 0;
-        }
-
-        .btn-img {
-            max-width: 120%;
-            max-height: 700%;
-            object-fit: contain;
-        }
-        .btn-img2 {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-
-        .btn-text h3 {
-            font-size: 1.05rem;
-            font-weight: 700;
-            margin-bottom: 2px;
-            letter-spacing: 0.5px;
-        }
-
-        .btn-text p {
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.85);
-            font-weight: 400;
-            line-height: 1.3;
-        }
-
-        .img-gold {
-            filter: invert(100%) sepia(100%) saturate(400%) hue-rotate(5deg) brightness(1.1);
-            transition: filter 0.3s ease;
-        }
+        .img-gold { filter: invert(100%) sepia(100%) saturate(400%) hue-rotate(5deg) brightness(1.1); }
 
         .btn-social { border-left: 4px solid var(--social-color); }
         .btn-quiz { border-left: 4px solid var(--quiz-color); }
         .btn-ranking { border-left: 4px solid var(--ranking-color); }
 
-        a.btn-nav:hover {
-            transform: translateY(-3px);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        a.btn-nav:hover .img-gold {
-            filter: invert(100%) sepia(100%) saturate(600%) hue-rotate(5deg) brightness(1.3) drop-shadow(0 0 5px var(--oro-premium));
-        }
-
-        a.btn-social:hover { 
-            border-color: var(--social-color);
-            box-shadow: 0 5px 15px rgba(77, 163, 255, 0.2); 
-        }
-        a.btn-quiz:hover { 
-            border-color: var(--quiz-color);
-            box-shadow: 0 5px 15px rgba(255, 204, 77, 0.2); 
-        }
-        a.btn-ranking:hover { 
-            border-color: var(--ranking-color);
-            box-shadow: 0 5px 15px rgba(255, 92, 138, 0.2); 
-        }
-
-
+        /* Effetto scia luminosa rapida */
         a.btn-nav::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -120px;
-            width: 60px;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.15);
-            transform: skewX(-25deg);
-            transition: 0.6s;
+            content: ""; position: absolute; top: 0; left: -120px; width: 60px; height: 100%;
+            background: rgba(255, 255, 255, 0.15); transform: skewX(-25deg); transition: 0.5s;
         }
+        a.btn-nav:active::before { left: 130%; }
 
-        a.btn-nav:hover::before {
-            left: 130%;
-        }
-
-        .invitation-footer {
-            margin-top: 30px;
-        }
-
-        .invitation-footer p {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.6);
-            line-height: 1.4;
-            font-style: italic;
-        }
+        .invitation-footer { margin-top: 25px; }
+        .invitation-footer p { font-size: 0.9rem; color: rgba(255, 255, 255, 0.6); font-style: italic; }
     </style>
 </head>
 <body>
 
-    <div class="mobile-container">
+    <div class="mobile-container" id="lockContainer">
         <div class="geo-shape shape-1"></div>
         <div class="geo-shape shape-2"></div>
-        <div class="geo-shape shape-3"></div>
+
+        <div class="tech-bg-element circuit-1"></div>
+        <div class="tech-bg-element circuit-2"></div>
+        <div class="confetto c1"></div>
+        <div class="confetto c2"></div>
+        <div class="confetto c3"></div>
+        <div class="confetto c4"></div>
 
         <div class="main-content">
-            
             <div class="top-logo-container">
                 <img src="images/computer.png" alt="Computer" class="top-logo">
             </div>
@@ -368,52 +229,48 @@
                     <p class="pre-title">Sei invitato alla mia</p>
                     <h1 class="title">
                         Festa di Laurea
-                        <img src="images/diploma.png" alt="Diploma" class="title-icon">
+                        <img src="images/diploma.png" alt="Diploma" class="title-icon img-gold">
                     </h1>
                     <p class="subtitle">in Ingegneria Informatica</p>
                 </header>
 
-                <!-- Info conseguimento Politecnico stilizzata ed elegante -->
                 <div class="poli-section">
                     <p class="poli-text">Conseguita al <strong>Politecnico di Torino</strong> il 17 Luglio 2026</p>
                     <img src="images/poli.png" alt="PoliTo" class="poli-logo img-gold">
                 </div>
                 
                 <div class="menu-navigation">
-
-                    <!-- DATA DELLA FESTA -->
                     <div class="btn-nav btn-quiz">
                         <div class="btn-icon-wrapper">
                             <img src="images/calendario.png" alt="Calendario" class="btn-img img-gold">
                         </div>
                         <div class="btn-text">
-                            <h3>Quando</h3>
-                            <p>Mercoledì 29 Luglio 2026 alle 21:00</p>
+                            <h3>Data della festa</h3>
+                            <p>Mercoledì, 29 Luglio 2026 alle 21:00</p>
                         </div>
                     </div>
 
                     <a href="https://www.google.com/maps/search/?api=1&query=Benvenuti+Al+Sud+Viale+delle+Rimembranze+Gioiosa+Ionica" target="_blank" class="btn-nav btn-social">
                         <div class="btn-icon-wrapper">
-                            <img src="images/posizione.png" alt="Mappa" class="btn-img2 img-gold">
+                            <img src="images/posizione.png" alt="Mappa" class="btn-img img-gold">
                         </div>
                         <div class="btn-text">
                             <h3>Dove</h3>
                             <p>Benvenuti al Sud, Gioiosa Jonica</p>
-                            <small style="font-size: 0.7rem; color: var(--social-color); display: block; margin-top: 2px;">Tocca per aprire il navigatore</small>
+                            <small style="font-size: 0.7rem; color: var(--social-color); display: block;">Tocca per aprire la mappa</small>
                         </div>
                     </a>
 
-
-                    <a href="https://wa.me/3456384780?text=Ciao%20Elena!%20Confermo%20la%20mia%20presenza%20alla%20tua%20festa%20di%20laurea!" target="_blank" class="btn-nav btn-ranking">
+                    <a href="https://wa.me/393331234567?text=Ciao%20Elena!%20Confermo%20con%20piacere%20la%20mia%20presenza%20alla%20tua%20festa%20di%20laurea!" target="_blank" class="btn-nav btn-ranking">
                         <div class="btn-icon-wrapper">
                             <img src="images/conferma.png" alt="Conferma" class="btn-img img-gold">
                         </div>
                         <div class="btn-text">
                             <h3>Conferma Presenza</h3>
-                            <small style="font-size: 0.7rem; color: var(--ranking-color); display: block; margin-top: 2px;">Tocca per scrivermi su WhatsApp</small>
+                            <p>È gradita conferma</p>
+                            <small style="font-size: 0.7rem; color: var(--ranking-color); display: block;">Tocca per scrivermi su WhatsApp</small>
                         </div>
                     </a>
-
                 </div>
                 
                 <footer class="invitation-footer">
@@ -423,5 +280,22 @@
         </div>
     </div>
 
+    <script>
+        // Neutralizza tutti i tentativi di scroll e trascinamento elastico nativo
+        function blockEvent(e) {
+            e.preventDefault();
+        }
+        window.addEventListener('touchmove', blockEvent, { passive: false });
+        window.addEventListener('scroll', blockEvent, { passive: false });
+        document.getElementById('lockContainer').addEventListener('touchmove', blockEvent, { passive: false });
+
+        // Isola e mantiene attivi solo i link ai servizi esterni (Maps, WA)
+        const activeLinks = document.querySelectorAll('a.btn-nav');
+        activeLinks.forEach(link => {
+            link.addEventListener('touchstart', function(e) {
+                e.stopPropagation();
+            }, { passive: true });
+        });
+    </script>
 </body>
 </html>
