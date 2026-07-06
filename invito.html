@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laurea di Elena - Invito</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='invito.css') }}?v=1.2">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="mobile-container">
+        <div class="geo-shape shape-1"></div>
+        <div class="geo-shape shape-2"></div>
+        <div class="geo-shape shape-3"></div>
+
+        <div class="main-content">
+            
+            <div class="top-logo-container">
+                <img src="{{ url_for('static', filename='png/computer.png') }}" alt="Computer" class="top-logo">
+            </div>
+
+            <!-- CARD PRINCIPALE -->
+            <div class="card">
+                <header class="header">
+                    <h1 class="title">
+                        <img src="{{ url_for('static', filename='png/circuitoSinistro.png') }}" alt="circuiti" class="title-icon img-gold"> Il tuo segnaposto
+                        <img src="{{ url_for('static', filename='png/circuitoDestro.png') }}" alt="circuiti2" class="title-icon img-gold">
+                    </h1>
+                    <p class="subtitle">Scopri la tua classe di apparteneza</p>
+                </header>
+                
+                <p class="description">
+                    In questa sezione potrai scoprire quale simbolo dell'informatica ti accompagnerà durante la festa.
+                </p>
+
+                <div class="warning">
+                    ⚠️ Il quiz può essere completato <strong>una sola volta</strong>. Il simbolo assegnato sarà definitivo.
+                </div>
+                
+                <div class="menu-navigation">
+                    
+                    <button type="button" class="btn-nav btn-random" onclick="location.href='/scelta-casuale'">
+                        <div class="btn-icon-wrapper-emoji">
+                            <img src="{{ url_for('static', filename='png/dadi.png') }}" alt="Dadi" class="quiz-logo">
+                        </div>
+                        <div class="btn-text">
+                            <h3>Scelta casuale</h3>
+                            <p>Lascia decidere al caso e ricevi un simbolo</p>
+                        </div>
+                    </button>
+
+                    <button type="button" class="btn-nav btn-quiz-choice" onclick="location.href='/inizia-quiz'">
+                        <div class="btn-icon-wrapper-emoji">
+                            <img src="{{ url_for('static', filename='png/persona.png') }}" alt="Persona" class="quiz-logo">
+                        </div>
+                        <div class="btn-text">
+                            <h3>Quiz della personalità</h3>
+                            <p>Rispondi alle domande per il tuo simbolo</p>
+                        </div>
+                    </button>
+
+                </div>
+            </div> <!-- CHIUSURA CORRETTA DELLA CARD -->
+
+            <!-- BOTTONE TORNA ALLA HOME (Posizionato sotto la card, centrato) -->
+            <div class="floating-actions-container">
+                <a href="/" class="floating-btn home-btn" title="Torna alla Home">
+                    <img src="{{ url_for('static', filename='png/casa.png') }}" alt="Home" class="floating-img img-gold">
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
