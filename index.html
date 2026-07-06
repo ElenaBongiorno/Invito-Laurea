@@ -7,9 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* ==========================================================================
-           BLOCCO TOTALE STRUTTURALE (Anti-Rimbalzo e Immobile)
-           ========================================================================== */
+
         html, body {
             margin: 0 !important;
             padding: 0 !important;
@@ -70,9 +68,6 @@
             }
         }
 
-        /* ==========================================================================
-           SISTEMA DI PARTICELLE E CIRCUITI (Pioggia Fitto e Asincrona)
-           ========================================================================== */
         .tech-bg-element {
             position: absolute;
             pointer-events: none;
@@ -80,8 +75,6 @@
             opacity: 0.25;
             animation: floatCircuit 14s infinite linear;
         }
-
-        /* Fake circuiti stilizzati */
         .circuit-1 { top: 12%; left: 6%; width: 50px; height: 50px; border-left: 2px solid var(--oro-premium); border-bottom: 2px solid var(--oro-premium); }
         .circuit-1::after { content: ''; position: absolute; bottom: -4px; right: 0; width: 6px; height: 6px; background: var(--oro-premium); border-radius: 50%; }
         
@@ -91,7 +84,6 @@
         .circuit-3 { top: 45%; right: 5%; width: 40px; height: 50px; border-right: 2px solid var(--oro-premium); border-bottom: 2px solid var(--oro-premium); animation-duration: 16s; animation-direction: reverse; }
         .circuit-3::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 6px; height: 6px; background: var(--oro-premium); border-radius: 50%; }
 
-        /* Coriandoli con posizioni, ritardi (delay) e velocità uniche */
         .confetto {
             position: absolute;
             pointer-events: none;
@@ -100,7 +92,6 @@
             animation: rainFall 7s infinite linear;
         }
 
-        /* Varianti di colore e forma */
         .oro { background: var(--oro-premium); }
         .rosso { background: var(--rosso-laurea); }
         .bianco { background: #ffffff; }
@@ -110,7 +101,6 @@
         .rettangolo { width: 5px; height: 11px; border-radius: 2px; }
         .cerchio { width: 8px; height: 8px; border-radius: 50%; }
 
-        /* Mappatura della pioggia sullo schermo */
         .c1 { left: 8%; top: -5%; animation-delay: 0s; animation-duration: 6s; }
         .c2 { left: 22%; top: -5%; animation-delay: 1.5s; animation-duration: 7.5s; }
         .c3 { left: 35%; top: -5%; animation-delay: 3.2s; animation-duration: 5.8s; }
@@ -119,21 +109,11 @@
         .c6 { left: 82%; top: -5%; animation-delay: 4s; animation-duration: 7.2s; }
         .c7 { left: 90%; top: -5%; animation-delay: 1.2s; animation-duration: 5.2s; }
         
-        /* Seconda ondata per riempire il loop */
         .c8 { left: 15%; top: -5%; animation-delay: 3.8s; animation-duration: 6.7s; }
         .c9 { left: 28%; top: -5%; animation-delay: 5.2s; animation-duration: 5.5s; }
         .c10 { left: 45%; top: -5%; animation-delay: 2.7s; animation-duration: 7.1s; }
         .c11 { left: 60%; top: -5%; animation-delay: 4.5s; animation-duration: 6.2s; }
         .c12 { left: 75%; top: -5%; animation-delay: 0.3s; animation-duration: 7.9s; }
-
-        /* Animazione fluttuazione circuiti */
-        @keyframes floatCircuit {
-            0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(15deg); }
-            100% { transform: translateY(0px) rotate(0deg); }
-        }
-
-        /* Animazione caduta coriandoli stile pioggia continua */
         @keyframes rainFall {
             0% {
                 top: -5%;
@@ -153,14 +133,9 @@
             }
         }
 
-        /* Luci soffuse fisse di sfondo */
         .geo-shape { position: absolute; border-radius: 50%; filter: blur(70px); z-index: 1; opacity: 0.35; pointer-events: none; }
         .shape-1 { top: -50px; right: -50px; width: 230px; height: 230px; background: var(--rosso-laurea); }
         .shape-2 { bottom: -80px; left: -50px; width: 280px; height: 280px; background: var(--verde-acceso); opacity: 0.08; }
-
-        /* ==========================================================================
-           CARD VETRIFICATA CENTRALE
-           ========================================================================== */
         .main-content { width: 100%; z-index: 5; display: flex; flex-direction: column; align-items: center; }
         .top-logo-container { margin-bottom: -15px; z-index: 6; }
         .top-logo { width: 90px; height: auto; display: block; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5)); }
