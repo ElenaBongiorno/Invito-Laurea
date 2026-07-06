@@ -4,12 +4,306 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invito alla Laurea di Elena</title>
-    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================================================
+           CORE STYLES & VARIABLES (Dallo stile originale del sito)
+           ========================================================================== */
+        :root {
+            --rosso-laurea: #990000;      
+            --oro-premium: #D4AF37;        
+            --verde-acceso: #00FF66;       
+            --scuro-bg: #121212;           
+            --card-bg: rgba(255, 255, 255, 0.04); 
+            --testo-light: #FFFFFF;
+            
+            --social-color: #4da3ff;
+            --quiz-color: #ffcc4d;
+            --ranking-color: #ff5c8a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--scuro-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--testo-light);
+            overflow: hidden;
+        }
+
+        /* ==========================================================================
+           CONTAINER MOBILE (Mockup su PC, Full Screen su Smartphone)
+           ========================================================================== */
+        .mobile-container {
+            width: 100%;
+            max-width: 410px; 
+            height: 100vh;
+            max-height: 840px; 
+            background: radial-gradient(circle at top left, #2a0000, #121212);
+            position: relative;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            border-radius: 30px; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        @media (max-width: 480px) {
+            .mobile-container {
+                max-width: 100%;
+                height: 100vh;
+                max-height: 100vh;
+                border-radius: 0;
+                padding: 15px;
+            }
+        }
+
+        /* ==========================================================================
+           ELEMENTI GEOMETRICI DI SFONDO
+           ========================================================================== */
+        .geo-shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: 1;
+            opacity: 0.5;
+        }
+
+        .shape-1 {
+            top: -50px;
+            right: -50px;
+            width: 230px;
+            height: 230px;
+            background: var(--rosso-laurea);
+        }
+
+        .shape-2 {
+            bottom: -80px;
+            left: -50px;
+            width: 280px;
+            height: 280px;
+            background: var(--verde-acceso);
+            opacity: 0.15; 
+        }
+
+        .shape-3 {
+            position: absolute;
+            width: 2px;
+            height: 35%;
+            background: linear-gradient(to bottom, transparent, var(--verde-acceso), transparent);
+            left: 10%;
+            bottom: 15%;
+            filter: blur(1px);
+            opacity: 0.4;
+            z-index: 1;
+        }
+
+        .main-content {
+            width: 100%;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Tocco accademico emoji */
+        .top-logo-container {
+            margin-bottom: -20px; 
+            z-index: 3; 
+        }
+
+        .top-emoji {
+            font-size: 4.5rem;
+            display: block;
+            filter: drop-shadow(0 8px 12px rgba(0,0,0,0.6));
+        }
+
+        /* ==========================================================================
+           CARD CENTRALE (Glassmorphism)
+           ========================================================================== */
+        .card {
+            position: relative;
+            background: linear-gradient(
+                145deg,
+                rgba(255, 255, 255, 0.06),
+                rgba(255, 255, 255, 0.02)
+            );
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 215, 120, 0.25);
+            border-top: 3px solid #D4AF37;
+            padding: 45px 20px 35px 20px;
+            border-radius: 24px;
+            width: 100%;
+            z-index: 2;
+            box-shadow:
+                0 20px 40px rgba(0,0,0,0.5),
+                0 0 25px rgba(212,175,55,0.15);
+            text-align: center;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(212,175,55,0.15);
+            pointer-events: none;
+        }
+
+        /* ==========================================================================
+           TESTI HEADER
+           ========================================================================== */
+        .header {
+            margin-bottom: 35px;
+        }
+
+        .title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.3rem;
+            font-weight: 700;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #ffffff 55%, #D4AF37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 0.3px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 0.85rem;
+            color: var(--oro-premium);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        /* ==========================================================================
+           ELEMENTI INFORMATIVI ESTESI
+           ========================================================================== */
+        .menu-navigation {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+        }
+
+        .btn-nav {
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            padding: 15px 20px;
+            border-radius: 14px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            text-align: left;
+            gap: 15px;
+        }
+
+        div.btn-nav {
+            cursor: default;
+        }
+
+        .btn-icon-wrapper {
+            width: 40px;  
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .info-emoji {
+            font-size: 1.7rem;
+        }
+
+        .btn-text h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-text p {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 400;
+            line-height: 1.3;
+        }
+
+        /* Bordi asimmetrici */
+        .btn-social { border-left: 4px solid var(--social-color); }
+        .btn-quiz { border-left: 4px solid var(--quiz-color); }
+        .btn-ranking { border-left: 4px solid var(--ranking-color); }
+
+        /* Hover dinamici */
+        a.btn-nav:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        a.btn-social:hover { 
+            border-color: var(--social-color);
+            box-shadow: 0 5px 15px rgba(77, 163, 255, 0.2); 
+        }
+        a.btn-quiz:hover { 
+            border-color: var(--quiz-color);
+            box-shadow: 0 5px 15px rgba(255, 204, 77, 0.2); 
+        }
+        a.btn-ranking:hover { 
+            border-color: var(--ranking-color);
+            box-shadow: 0 5px 15px rgba(255, 92, 138, 0.2); 
+        }
+
+        /* Effetto scia luminosa al passaggio del mouse */
+        a.btn-nav::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -120px;
+            width: 60px;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.15);
+            transform: skewX(-25deg);
+            transition: 0.6s;
+        }
+
+        a.btn-nav:hover::before {
+            left: 130%;
+        }
+
+        .invitation-footer {
+            margin-top: 30px;
+        }
+
+        .invitation-footer p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.4;
+            font-style: italic;
+        }
+    </style>
 </head>
 <body>
 
     <div class="mobile-container">
+        <!-- Cerchi sfocati e luci al neon di sfondo -->
         <div class="geo-shape shape-1"></div>
         <div class="geo-shape shape-2"></div>
         <div class="geo-shape shape-3"></div>
@@ -28,6 +322,7 @@
                 
                 <div class="menu-navigation">
                     
+                    <!-- DATA -->
                     <div class="btn-nav btn-quiz">
                         <div class="btn-icon-wrapper">
                             <span class="info-emoji">📅</span>
@@ -38,6 +333,7 @@
                         </div>
                     </div>
 
+                    <!-- MAPPA -->
                     <a href="https://maps.google.com" target="_blank" class="btn-nav btn-social">
                         <div class="btn-icon-wrapper">
                             <span class="info-emoji">📍</span>
@@ -45,10 +341,11 @@
                         <div class="btn-text">
                             <h3>Dove</h3>
                             <p>Nome del Locale, Via Roma 12, Milano</p>
-                            <small style="font-size: 0.7rem; color: var(--social-color);">Tocca per aprire la mappa</small>
+                            <small style="font-size: 0.7rem; color: var(--social-color); display: block; margin-top: 2px;">Tocca per aprire la mappa</small>
                         </div>
                     </a>
 
+                    <!-- RSVP (Link WhatsApp) -->
                     <a href="https://wa.me/393331234567?text=Ciao%20Elena!%20Confermo%20la%20mia%20presenza%20alla%20tua%20laurea!" target="_blank" class="btn-nav btn-ranking">
                         <div class="btn-icon-wrapper">
                             <span class="info-emoji">🥳</span>
@@ -56,7 +353,7 @@
                         <div class="btn-text">
                             <h3>Conferma Presenza</h3>
                             <p>Fammelo sapere entro il 10 Luglio</p>
-                            <small style="font-size: 0.7rem; color: var(--ranking-color);">Tocca per scrivermi su WhatsApp</small>
+                            <small style="font-size: 0.7rem; color: var(--ranking-color); display: block; margin-top: 2px;">Tocca per scrivermi su WhatsApp</small>
                         </div>
                     </a>
 
