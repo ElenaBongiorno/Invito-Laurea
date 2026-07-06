@@ -19,7 +19,7 @@
             position: fixed !important;
             top: 0 !important;
             left: 0 !important;
-            touch-action: none !important; /* Blocca lo scroll nativo del browser */
+            touch-action: none !important;
             overscroll-behavior: none !important;
             background-color: #121212;
         }
@@ -46,7 +46,6 @@
             -webkit-touch-callout: none;
         }
 
-        /* Container principale che assorbe i tocchi */
         .mobile-container {
             position: absolute !important;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -72,65 +71,95 @@
         }
 
         /* ==========================================================================
-           EFFETTI DI SFONDO ANIMATI (Coriandoli e Circuiti)
+           SISTEMA DI PARTICELLE E CIRCUITI (Pioggia Fitto e Asincrona)
            ========================================================================== */
         .tech-bg-element {
             position: absolute;
             pointer-events: none;
             z-index: 1;
             opacity: 0.25;
-            animation: floatAnimation 12s infinite linear;
+            animation: floatCircuit 14s infinite linear;
         }
 
-        /* Fake circuiti stilizzati in CSS */
-        .circuit-1 {
-            top: 15%; left: 5%; width: 60px; height: 60px;
-            border-left: 2px solid var(--oro-premium);
-            border-bottom: 2px solid var(--oro-premium);
-        }
-        .circuit-1::after {
-            content: ''; position: absolute; bottom: -4px; right: 0;
-            width: 8px; height: 8px; background: var(--oro-premium); border-radius: 50%;
-        }
+        /* Fake circuiti stilizzati */
+        .circuit-1 { top: 12%; left: 6%; width: 50px; height: 50px; border-left: 2px solid var(--oro-premium); border-bottom: 2px solid var(--oro-premium); }
+        .circuit-1::after { content: ''; position: absolute; bottom: -4px; right: 0; width: 6px; height: 6px; background: var(--oro-premium); border-radius: 50%; }
+        
+        .circuit-2 { bottom: 12%; right: 6%; width: 60px; height: 40px; border-right: 2px solid var(--rosso-laurea); border-top: 2px solid var(--rosso-laurea); animation-duration: 18s; }
+        .circuit-2::after { content: ''; position: absolute; top: -4px; left: 0; width: 6px; height: 6px; background: var(--rosso-laurea); border-radius: 50%; }
 
-        .circuit-2 {
-            bottom: 20%; right: 8%; width: 80px; height: 40px;
-            border-right: 2px solid var(--rosso-laurea);
-            border-top: 2px solid var(--rosso-laurea);
-            animation-duration: 16s;
-        }
-        .circuit-2::after {
-            content: ''; position: absolute; top: -4px; left: 0;
-            width: 8px; height: 8px; background: var(--rosso-laurea); border-radius: 50%;
-        }
+        .circuit-3 { top: 45%; right: 5%; width: 40px; height: 50px; border-right: 2px solid var(--oro-premium); border-bottom: 2px solid var(--oro-premium); animation-duration: 16s; animation-direction: reverse; }
+        .circuit-3::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 6px; height: 6px; background: var(--oro-premium); border-radius: 50%; }
 
-        /* Coriandoli geometrici fluttuanti */
+        /* Coriandoli con posizioni, ritardi (delay) e velocità uniche */
         .confetto {
             position: absolute;
-            width: 10px; height: 10px;
             pointer-events: none;
             z-index: 1;
-            opacity: 0.4;
-            animation: floatAnimation 8s infinite linear;
+            opacity: 0;
+            animation: rainFall 7s infinite linear;
         }
-        .c1 { background: var(--oro-premium); top: 10%; right: 20%; animation-duration: 9s; clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%); }
-        .c2 { background: var(--rosso-laurea); bottom: 15%; left: 15%; animation-duration: 11s; transform: rotate(45deg); }
-        .c3 { background: #ffffff; top: 45%; left: 8%; animation-duration: 14s; width: 6px; height: 12px; border-radius: 3px; }
-        .c4 { background: var(--oro-premium); bottom: 40%; right: 12%; animation-duration: 7s;}
 
-        @keyframes floatAnimation {
-            0% { transform: translateY(0px) rotate(0deg); opacity: 0.2; }
-            50% { transform: translateY(-25px) rotate(90deg); opacity: 0.5; }
-            100% { transform: translateY(0px) rotate(180deg); opacity: 0.2; }
+        /* Varianti di colore e forma */
+        .oro { background: var(--oro-premium); }
+        .rosso { background: var(--rosso-laurea); }
+        .bianco { background: #ffffff; }
+        
+        .triangolo { clip-path: polygon(50% 0%, 0% 100%, 100% 100%); width: 12px; height: 12px; }
+        .quadrato { width: 9px; height: 9px; }
+        .rettangolo { width: 5px; height: 11px; border-radius: 2px; }
+        .cerchio { width: 8px; height: 8px; border-radius: 50%; }
+
+        /* Mappatura della pioggia sullo schermo */
+        .c1 { left: 8%; top: -5%; animation-delay: 0s; animation-duration: 6s; }
+        .c2 { left: 22%; top: -5%; animation-delay: 1.5s; animation-duration: 7.5s; }
+        .c3 { left: 35%; top: -5%; animation-delay: 3.2s; animation-duration: 5.8s; }
+        .c4 { left: 50%; top: -5%; animation-delay: 0.8s; animation-duration: 8s; }
+        .c5 { left: 68%; top: -5%; animation-delay: 2.1s; animation-duration: 6.4s; }
+        .c6 { left: 82%; top: -5%; animation-delay: 4s; animation-duration: 7.2s; }
+        .c7 { left: 90%; top: -5%; animation-delay: 1.2s; animation-duration: 5.2s; }
+        
+        /* Seconda ondata per riempire il loop */
+        .c8 { left: 15%; top: -5%; animation-delay: 3.8s; animation-duration: 6.7s; }
+        .c9 { left: 28%; top: -5%; animation-delay: 5.2s; animation-duration: 5.5s; }
+        .c10 { left: 45%; top: -5%; animation-delay: 2.7s; animation-duration: 7.1s; }
+        .c11 { left: 60%; top: -5%; animation-delay: 4.5s; animation-duration: 6.2s; }
+        .c12 { left: 75%; top: -5%; animation-delay: 0.3s; animation-duration: 7.9s; }
+
+        /* Animazione fluttuazione circuiti */
+        @keyframes floatCircuit {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(15deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        /* Animazione caduta coriandoli stile pioggia continua */
+        @keyframes rainFall {
+            0% {
+                top: -5%;
+                transform: translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                top: 105%;
+                transform: translateX(25px) rotate(540deg);
+                opacity: 0;
+            }
         }
 
         /* Luci soffuse fisse di sfondo */
-        .geo-shape { position: absolute; border-radius: 50%; filter: blur(70px); z-index: 1; opacity: 0.4; pointer-events: none; }
+        .geo-shape { position: absolute; border-radius: 50%; filter: blur(70px); z-index: 1; opacity: 0.35; pointer-events: none; }
         .shape-1 { top: -50px; right: -50px; width: 230px; height: 230px; background: var(--rosso-laurea); }
-        .shape-2 { bottom: -80px; left: -50px; width: 280px; height: 280px; background: var(--verde-acceso); opacity: 0.1; }
+        .shape-2 { bottom: -80px; left: -50px; width: 280px; height: 280px; background: var(--verde-acceso); opacity: 0.08; }
 
         /* ==========================================================================
-           CARD VETRIFERATA CENTRALE
+           CARD VETRIFICATA CENTRALE
            ========================================================================== */
         .main-content { width: 100%; z-index: 5; display: flex; flex-direction: column; align-items: center; }
         .top-logo-container { margin-bottom: -15px; z-index: 6; }
@@ -155,7 +184,6 @@
             border: 1px solid rgba(212,175,55,0.12); pointer-events: none;
         }
 
-        /* Intestazioni */
         .header { margin-bottom: 20px; }
         .pre-title { font-size: 0.85rem; color: rgba(255, 255, 255, 0.7); text-transform: uppercase; letter-spacing: 2px; font-weight: 600; margin-bottom: 4px; }
         
@@ -165,7 +193,7 @@
             margin-bottom: 6px; display: flex; align-items: center; justify-content: center; gap: 8px;
         }
 
-        .title-icon { width: 32px; height: auto; }
+        .title-icon { width: 55px; height: auto; }
         .subtitle { font-size: 0.85rem; color: var(--oro-premium); text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
 
         /* Politecnico */
@@ -185,7 +213,8 @@
         }
 
         .btn-icon-wrapper { width: 36px; height: 36px; display: flex; justify-content: center; align-items: center; flex-shrink: 0; }
-        .btn-img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .btn-img { max-width: 120%; max-height: 800%; object-fit: contain; }
+        .btn-img2 { max-width: 100%; max-height: 90%; object-fit: contain; }
         .btn-text h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 2px; letter-spacing: 0.5px; }
         .btn-text p { font-size: 0.85rem; color: rgba(255, 255, 255, 0.85); line-height: 1.3; }
 
@@ -195,7 +224,6 @@
         .btn-quiz { border-left: 4px solid var(--quiz-color); }
         .btn-ranking { border-left: 4px solid var(--ranking-color); }
 
-        /* Effetto scia luminosa rapida */
         a.btn-nav::before {
             content: ""; position: absolute; top: 0; left: -120px; width: 60px; height: 100%;
             background: rgba(255, 255, 255, 0.15); transform: skewX(-25deg); transition: 0.5s;
@@ -212,12 +240,19 @@
         <div class="geo-shape shape-1"></div>
         <div class="geo-shape shape-2"></div>
 
-        <div class="tech-bg-element circuit-1"></div>
-        <div class="tech-bg-element circuit-2"></div>
-        <div class="confetto c1"></div>
-        <div class="confetto c2"></div>
-        <div class="confetto c3"></div>
-        <div class="confetto c4"></div>
+        <div class="confetto oro quadrato c1"></div>
+        <div class="confetto rosso cerchio c2"></div>
+        <div class="confetto bianco rettangolo c3"></div>
+        <div class="confetto oro triangolo c4"></div>
+        <div class="confetto rosso quadrato c5"></div>
+        <div class="confetto oro cerchio c6"></div>
+        <div class="confetto bianco triangolo c7"></div>
+        
+        <div class="confetto rosso rettangolo c8"></div>
+        <div class="confetto oro quadrato c9"></div>
+        <div class="confetto bianco cerchio c10"></div>
+        <div class="confetto rosso triangolo c11"></div>
+        <div class="confetto oro rettangolo c12"></div>
 
         <div class="main-content">
             <div class="top-logo-container">
@@ -229,7 +264,7 @@
                     <p class="pre-title">Sei invitato alla mia</p>
                     <h1 class="title">
                         Festa di Laurea
-                        <img src="images/diploma.png" alt="Diploma" class="title-icon img-gold">
+                        <img src="images/diploma.png" alt="Diploma" class="title-icon">
                     </h1>
                     <p class="subtitle">in Ingegneria Informatica</p>
                 </header>
@@ -252,7 +287,7 @@
 
                     <a href="https://www.google.com/maps/search/?api=1&query=Benvenuti+Al+Sud+Viale+delle+Rimembranze+Gioiosa+Ionica" target="_blank" class="btn-nav btn-social">
                         <div class="btn-icon-wrapper">
-                            <img src="images/posizione.png" alt="Mappa" class="btn-img img-gold">
+                            <img src="images/posizione.png" alt="Mappa" class="btn-img2 img-gold">
                         </div>
                         <div class="btn-text">
                             <h3>Dove</h3>
@@ -281,15 +316,11 @@
     </div>
 
     <script>
-        // Neutralizza tutti i tentativi di scroll e trascinamento elastico nativo
-        function blockEvent(e) {
-            e.preventDefault();
-        }
+        function blockEvent(e) { e.preventDefault(); }
         window.addEventListener('touchmove', blockEvent, { passive: false });
         window.addEventListener('scroll', blockEvent, { passive: false });
         document.getElementById('lockContainer').addEventListener('touchmove', blockEvent, { passive: false });
 
-        // Isola e mantiene attivi solo i link ai servizi esterni (Maps, WA)
         const activeLinks = document.querySelectorAll('a.btn-nav');
         activeLinks.forEach(link => {
             link.addEventListener('touchstart', function(e) {
