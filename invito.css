@@ -1,118 +1,19 @@
 /* Stili specifici per l'invito */
-.nome-festa {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.8rem;
-    color: var(--oro-premium);
-    font-weight: 700;
-    margin-top: -5px;
-}
-
-/* Griglia per i dettagli dell'evento */
-.details-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    margin: 25px 0;
-}
-
-.detail-item {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 14px;
-    padding: 15px 10px;
-    text-align: center;
-}
-
-.detail-icon {
-    font-size: 1.5rem;
-    display: block;
-    margin-bottom: 5px;
-}
-
-.detail-title {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    color: var(--oro-premium);
-    letter-spacing: 1px;
-    font-weight: 600;
-}
-
-.detail-text {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.9);
-    margin-top: 4px;
-    line-height: 1.4;
-}
-
-/* Bottone Mappe */
-.btn-maps {
-    display: inline-block;
-    width: 100%;
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px dashed rgba(214, 175, 55, 0.4);
-    border-radius: 10px;
-    color: white;
-    text-decoration: none;
-    font-size: 0.85rem;
-    transition: 0.3s;
-}
-.btn-maps:hover {
-    background: rgba(214, 175, 55, 0.1);
-}
-
-.divider {
-    border: none;
-    height: 1px;
-    background: linear-gradient(to right, transparent, rgba(214, 175, 55, 0.3), transparent);
-    margin: 30px 0;
-}
-
-/* Sezione RSVP */
-.rsvp-section h3 {
-    font-size: 1.2rem;
-    color: white;
-    margin-bottom: 5px;
-}
-.rsvp-section p {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 20px;
-}
-
-.rsvp-buttons {
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background: #f7e9ff;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-.btn-rsvp {
-    padding: 15px;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    text-align: center;
+h1{
+    color: #c2185b;
 }
 
-.btn-conferma-si {
-    background: var(--rosso-laurea);
-    color: white;
-    box-shadow: 0 4px 15px rgba(153, 0, 0, 0.4);
-    border: 1px solid rgba(255,255,255,0.1);
-}
-.btn-conferma-si:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(153, 0, 0, 0.6);
-}
-
-.btn-whatsapp {
-    background: #25D366; /* Verde WhatsApp */
-    color: white;
-    font-size: 0.9rem;
-}
-.btn-whatsapp:hover {
-    transform: translateY(-2px);
-    background: #20ba5a;
+p{
+    font-size: 20px;
 }
