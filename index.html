@@ -7,9 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* ==========================================================================
-           CORE STYLES & VARIABLES (Dallo stile originale del sito)
-           ========================================================================== */
         :root {
             --rosso-laurea: #990000;      
             --oro-premium: #D4AF37;        
@@ -39,10 +36,6 @@
             color: var(--testo-light);
             overflow: hidden;
         }
-
-        /* ==========================================================================
-           CONTAINER MOBILE (Mockup su PC, Full Screen su Smartphone)
-           ========================================================================== */
         .mobile-container {
             width: 100%;
             max-width: 410px; 
@@ -70,9 +63,6 @@
             }
         }
 
-        /* ==========================================================================
-           ELEMENTI GEOMETRICI DI SFONDO
-           ========================================================================== */
         .geo-shape {
             position: absolute;
             border-radius: 50%;
@@ -118,21 +108,18 @@
             align-items: center;
         }
 
-        /* Tocco accademico emoji */
         .top-logo-container {
-            margin-bottom: -20px; 
+            margin-bottom: -15px; 
             z-index: 3; 
         }
 
-        .top-emoji {
-            font-size: 4.5rem;
+        .top-logo {
+            width: 90px;
+            height: auto;
             display: block;
-            filter: drop-shadow(0 8px 12px rgba(0,0,0,0.6));
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
         }
 
-        /* ==========================================================================
-           CARD CENTRALE (Glassmorphism)
-           ========================================================================== */
         .card {
             position: relative;
             background: linear-gradient(
@@ -162,24 +149,39 @@
             border: 1px solid rgba(212,175,55,0.15);
             pointer-events: none;
         }
-
-        /* ==========================================================================
-           TESTI HEADER
-           ========================================================================== */
         .header {
-            margin-bottom: 35px;
+            margin-bottom: 25px;
+        }
+
+        .pre-title {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 4px;
         }
 
         .title {
             font-family: 'Playfair Display', serif;
-            font-size: 2.3rem;
+            font-size: 2.1rem;
             font-weight: 700;
             line-height: 1.2;
             background: linear-gradient(135deg, #ffffff 55%, #D4AF37);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: 0.3px;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .title-icon {
+            width: 50px;
+            height: auto;
+            vertical-align: middle;
         }
 
         .subtitle {
@@ -190,9 +192,33 @@
             font-weight: 600;
         }
 
-        /* ==========================================================================
-           ELEMENTI INFORMATIVI ESTESI
-           ========================================================================== */
+        .poli-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            padding: 0 10px;
+        }
+
+        .poli-text {
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.65);
+            text-align: left;
+            line-height: 1.4;
+            max-width: 250px;
+        }
+
+        .poli-text strong {
+            color: var(--oro-premium);
+        }
+
+        .poli-logo {
+            width: 55px;
+            height: auto;
+            flex-shrink: 0;
+        }
+
         .menu-navigation {
             display: flex;
             flex-direction: column;
@@ -221,16 +247,23 @@
         }
 
         .btn-icon-wrapper {
-            width: 40px;  
-            height: 40px;
+            width: 36px;  
+            height: 36px;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-shrink: 0;
         }
 
-        .info-emoji {
-            font-size: 1.7rem;
+        .btn-img {
+            max-width: 120%;
+            max-height: 700%;
+            object-fit: contain;
+        }
+        .btn-img2 {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
 
         .btn-text h3 {
@@ -247,15 +280,22 @@
             line-height: 1.3;
         }
 
-        /* Bordi asimmetrici */
+        .img-gold {
+            filter: invert(100%) sepia(100%) saturate(400%) hue-rotate(5deg) brightness(1.1);
+            transition: filter 0.3s ease;
+        }
+
         .btn-social { border-left: 4px solid var(--social-color); }
         .btn-quiz { border-left: 4px solid var(--quiz-color); }
         .btn-ranking { border-left: 4px solid var(--ranking-color); }
 
-        /* Hover dinamici */
         a.btn-nav:hover {
             transform: translateY(-3px);
             background: rgba(255, 255, 255, 0.05);
+        }
+
+        a.btn-nav:hover .img-gold {
+            filter: invert(100%) sepia(100%) saturate(600%) hue-rotate(5deg) brightness(1.3) drop-shadow(0 0 5px var(--oro-premium));
         }
 
         a.btn-social:hover { 
@@ -271,7 +311,7 @@
             box-shadow: 0 5px 15px rgba(255, 92, 138, 0.2); 
         }
 
-        /* Effetto scia luminosa al passaggio del mouse */
+
         a.btn-nav::before {
             content: "";
             position: absolute;
@@ -310,58 +350,56 @@
         <div class="main-content">
             
             <div class="top-logo-container">
-                <span class="top-emoji">🎓</span>
+                <img src="images/computer.png" alt="Computer" class="top-logo">
             </div>
 
             <div class="card">
                 <header class="header">
-                    <h1 class="title">Sei Invitato alla mia Festa di Laurea</h1>
-                    <p class="subtitle">Ingegneria Informatica</p>
+                    <p class="pre-title">Sei invitato alla mia</p>
+                    <h1 class="title">
+                        Festa di Laurea
+                        <img src="images/diploma.png" alt="Diploma" class="title-icon">
+                    </h1>
+                    <p class="subtitle">in Ingegneria Informatica</p>
                 </header>
+
+                <!-- Info conseguimento Politecnico stilizzata ed elegante -->
+                <div class="poli-section">
+                    <p class="poli-text">Conseguita al <strong>Politecnico di Torino</strong> il 17 Luglio 2026</p>
+                    <img src="images/poli.png" alt="PoliTo" class="poli-logo img-gold">
+                </div>
                 
                 <div class="menu-navigation">
-                    
-                    <!-- DATA -->
+
+                    <!-- DATA DELLA FESTA -->
                     <div class="btn-nav btn-quiz">
                         <div class="btn-icon-wrapper">
-                            <span class="info-emoji">📅</span>
+                            <img src="images/calendario.png" alt="Calendario" class="btn-img img-gold">
                         </div>
                         <div class="btn-text">
-                            <h3>Conseguita al Politecnico di Torino </h3>
-                            <p>Venerdì, 17 Luglio 2026</p>
+                            <h3>Quando</h3>
+                            <p>Mercoledì 29 Luglio 2026 alle 21:00</p>
                         </div>
                     </div>
 
-                    <div class="btn-nav btn-quiz">
+                    <a href="https://www.google.com/maps/search/?api=1&query=Benvenuti+Al+Sud+Viale+delle+Rimembranze+Gioiosa+Ionica" target="_blank" class="btn-nav btn-social">
                         <div class="btn-icon-wrapper">
-                            <span class="info-emoji">📅</span>
-                        </div>
-                        <div class="btn-text">
-                            <h3> Data della festa </h3>
-                            <p>Mercoledì, 29 Luglio 2026 alle 21:00 </p>
-                        </div>
-                    </div>
-
-                    <!-- MAPPA -->
-                    <a href="https://maps.google.com" target="_blank" class="btn-nav btn-social">
-                        <div class="btn-icon-wrapper">
-                            <span class="info-emoji">📍</span>
+                            <img src="images/posizione.png" alt="Mappa" class="btn-img2 img-gold">
                         </div>
                         <div class="btn-text">
                             <h3>Dove</h3>
                             <p>Benvenuti al Sud, Gioiosa Jonica</p>
-                            <small style="font-size: 0.7rem; color: var(--social-color); display: block; margin-top: 2px;">Tocca per aprire la mappa</small>
+                            <small style="font-size: 0.7rem; color: var(--social-color); display: block; margin-top: 2px;">Tocca per aprire il navigatore</small>
                         </div>
                     </a>
 
-                    <!-- RSVP (Link WhatsApp) -->
-                    <a href="https://wa.me/393331234567?text=Ciao%20Elena!%20Confermo%20la%20mia%20presenza%20alla%20tua%20laurea!" target="_blank" class="btn-nav btn-ranking">
+
+                    <a href="https://wa.me/3456384780?text=Ciao%20Elena!%20Confermo%20la%20mia%20presenza%20alla%20tua%20festa%20di%20laurea!" target="_blank" class="btn-nav btn-ranking">
                         <div class="btn-icon-wrapper">
-                            <span class="info-emoji">🥳</span>
+                            <img src="images/conferma.png" alt="Conferma" class="btn-img img-gold">
                         </div>
                         <div class="btn-text">
                             <h3>Conferma Presenza</h3>
-                            <p> E' gradita conferma</p>
                             <small style="font-size: 0.7rem; color: var(--ranking-color); display: block; margin-top: 2px;">Tocca per scrivermi su WhatsApp</small>
                         </div>
                     </a>
